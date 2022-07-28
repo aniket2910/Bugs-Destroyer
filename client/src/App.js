@@ -1,6 +1,7 @@
 import Login from './pages/signup/Login'
 import { extendTheme, ChakraProvider } from '@chakra-ui/react';
-import SignupCard from './pages/signup/Signup';
+import Footer from './pages/footer/Footer';
+import UserProfileEdit from './pages/userProfile/Userprofile';
 
 const colors = {
   brand: {
@@ -19,7 +20,8 @@ function App() {
   <div>
 
     <Login/>
-    <SignupCard/>
+<UserProfileEdit/>
+    <Footer/>
   </div>
   </ChakraProvider>
   );
