@@ -6,13 +6,14 @@ const {
   deleteIssue,
   commentToIssue,
 } = require("../controllers/issues.controller");
+const { requireLogin } = require("../middleware/requireLogin.middleware");
 
 const issueRoutes = express.Router();
 
-issueRoutes.get("/all", getAllIssues);
-issueRoutes.post("/create", createIssue);
-issueRoutes.patch("/update/:id", updateIssue);
-issueRoutes.delete("/delete/:id", deleteIssue);
-issueRoutes.patch("/comment/:id", commentToIssue);
+issueRoutes.get("/all", requireLogin, getAllIssues);
+issueRoutes.post("/create", requireLogin, createIssue);
+issueRoutes.patch("/update/:id", requireLogin, updateIssue);
+issueRoutes.delete("/delete/:id", requireLogin, deleteIssue);
+issueRoutes.patch("/comment/:id", requireLogin, commentToIssue);
 
 module.exports = { issueRoutes };

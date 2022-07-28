@@ -9,7 +9,7 @@ const { issueRoutes } = require("./routes/issues.routes");
 const { IssueModel } = require("./models/IssueSchema.model");
 
 const authRouter = require("./routes/auth.routes");
-const todoRouter = require("./routes/todo.routes")
+const todoRouter = require("./routes/todo.routes");
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/issues", issueRoutes);
 
 app.use("/auth", authRouter);
-app.use("/user", todoRouter);
+app.use("/todo", todoRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello" });

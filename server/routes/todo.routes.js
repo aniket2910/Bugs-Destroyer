@@ -1,55 +1,28 @@
-const { Router } = require("express")
-const TodoModel = require("../models/TodoSchema");
+const { Router } = require("express");
+const {
+  getTodos,
+  createTodo,
+  updateTodo,
+  deleteTodo,
+  updateStatus,
+} = require("../controllers/todos.controller");
+const { requireLogin } = require("../middleware/requireLogin.middleware");
 
 const todoRouter = Router();
 
 //getting Users Todos
-todoRouter.get("/:userId/todos", async (req, res) => {
-    let userId = req.params;
-    let todos = await TodoModel.find(userId)
-    return res.send(todos)
-})
+todoRouter.get("/all-todos", requireLogin, getTodos);
 
 //post Todos
-todoRouter.post("/:userId/todos", async (req, res) => {
-    const userId = req.params.userId; //here we get userId from params 
-    console.log(userId)
-    let payload = {
-        ...req.body,
-        userId
-    }
-    console.log(payload)
-    let todo = await new TodoModel(payload);
-    todo.save((err, success) => {
-        if (err) {
-            return res.status(500).send({ message: "something went wrong" });
-        }
-        return res.status(201).send(success) 
-    })
-})
+todoRouter.post("/create", requireLogin, createTodo);
 
-//partially Delete Todos
-todoRouter.patch("/:userId/todos/:id", async (req, res) => {
-    try {
-        const _id = req.params.id
-        const DeleteTodo = await TodoModel.findByIdAndUpdate(_id, req.body);
-        return res.send(DeleteTodo)
-    }
-    catch (error) {
-        return res.status(400).send(error)
-    }
-})
+//partially update Todos
+todoRouter.patch("/update/:id", requireLogin, updateTodo);
+
+//partially delete Todos
+todoRouter.patch("/delete/:id", requireLogin, deleteTodo);
 
 //Upadate Status
-todoRouter.patch("/:userId/todos/:id", async (req, res) => {
-    try {
-        const _id = req.params.id
-        const updateStatus = await TodoModel.findByIdAndUpdate(_id, req.body);
-        return res.send(updateStatus)
-    }
-    catch (error) {
-        return res.status(400).send(error)
-    }
-})
+todoRouter.patch("/updateStatus/:id", requireLogin, updateStatus);
 
 module.exports = todoRouter;
