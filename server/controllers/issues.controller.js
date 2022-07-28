@@ -19,6 +19,7 @@ const createIssue = async (req, res) => {
       title,
       desc,
       code,
+      user_id: req.user_data._id,
       deleted: false,
     });
     await issue.save();
@@ -70,6 +71,7 @@ const commentToIssue = async (req, res) => {
     const comment = await CommentModel.create({
       comment: req.body.comment,
       issue_id: id,
+      user_id: req.user_data._id,
     });
     await comment.save();
 
