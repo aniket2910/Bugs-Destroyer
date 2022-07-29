@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     default: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
   },
   password: { type: String, require: true },
+  access: { type: String, require: true }
 });
 
 const UserModel = mongoose.model("user", userSchema);

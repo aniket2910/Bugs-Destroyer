@@ -49,6 +49,7 @@ const loginUser = async (req, res) => {
           lastname: user?.lastname,
           user_id: user?._id,
           email: user?.email,
+
         },
         "SECRETTOKENKEY",
         {
@@ -72,4 +73,16 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+const getProfile = async (req, res) => {
+  try {
+    let _id = req.params.id;
+    let profile = await UserModel.find(_id);
+    return res.status(200).send({ type: "success", data: profile });
+  } catch (e) {
+    return res
+      .status(500)
+      .json({ type: "error", message: "Internal Error Occured" });
+  }
+}
+
+module.exports = { registerUser, loginUser, getProfile };
