@@ -2,10 +2,10 @@
 import { applyMiddleware, combineReducers, compose, legacy_createStore as createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { loginReducer } from './auth/Login/reducer';
-// import { signupReducer } from './auth/signup/reducer';
+import { signupReducer } from './auth/signup/reducer';
 
 const rootReducer = combineReducers({
-    // signup: signupReducer,
+    signup: signupReducer,
     login: loginReducer,
 })
 

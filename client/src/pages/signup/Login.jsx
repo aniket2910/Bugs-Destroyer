@@ -21,20 +21,21 @@ import {
 
 } from '@chakra-ui/react';
 
+
+
 import React, { useEffect, useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-
+import swal from 'sweetalert';
 
 import svg from './svg.svg'
 import svg1 from './svg1.svg'
 import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux';
 import { getLoginToken } from '../../redux/auth/Login/action';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { getSignupToken } from '../../redux/auth/signup/action';
 import { FaFacebook, FaGoogle, FaLinkedinIn } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-
 
 export default function SplitScreen() {
 
@@ -62,7 +63,7 @@ export default function SplitScreen() {
 
   useEffect(() => {
       if (res) {
-          navigate("/task")
+          // navigate("/task")
           toast({
               title: 'you have logged in successfully',
               status: 'success',
@@ -91,6 +92,15 @@ export default function SplitScreen() {
       let payload = { email, password }
       payload = JSON.stringify(payload);
       dispatch(getLoginToken(payload))
+
+      // swal({
+      //   title: "success",
+      //   text: "Login success",
+      //   icon: "success",
+      //   button: "Ok",
+      // });
+
+      console.log(payload)
   }
   // Signup
   const [userData, setUserData] = useState({});
@@ -103,8 +113,6 @@ export default function SplitScreen() {
         ...userData,
         [name]: value
     })
-
-    
 }
 
 const handleSubmit2 = (e) => {
@@ -113,6 +121,13 @@ const handleSubmit2 = (e) => {
     dispatch(getSignupToken(payload, userid))
 
     console.log(payload);
+    swal({
+      title: "success",
+      text: "Signup success",
+      icon: "success",
+      button: "Login",
+    });
+setSign(false)
 }
 
 
@@ -127,7 +142,6 @@ const handleSubmit2 = (e) => {
             {/* <Heading as='h4' size='2xl' textAlign={'center'} color={'white'}>Welcome to Bug Destroyer</Heading> */}
             <Stack  minH={'65vh'} width='60%' borderRadius={'3xl'} direction={{ base: 'column', md: 'row' }}
               background={'#090909'}>
-
 
               <Flex p={8} flex={1} align={'center'} justify={'center'}>
                 <Stack spacing={4} w={'full'} maxW={'md'}>

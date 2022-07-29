@@ -15,30 +15,86 @@ import {
   } from '@chakra-ui/react';
   import { SmallCloseIcon } from '@chakra-ui/icons';
   
+  import {FaUserCircle} from 'react-icons/fa'
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+
+
+
   export default function UserProfileEdit(): JSX.Element {
+   const [userData, setUserData]= useState({})
+    const [file, setFile] = useState();
+
+    const { res, loading, error } = useSelector((store) => store.login)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    let userid = localStorage.getItem("userid");
+
+    
+    function handleChange(e) {
+        let fileU= e.target.files
+        let name = e.target.name;
+        let value = e.target.value;
+
+        if(fileU){
+        setFile(URL.createObjectURL(e.target.files[0]));
+        }
+      
+    setUserData({
+        ...userData,
+        [name]: value,
+        file
+    })
+
+  
+    }
+
+   const handleSubmit=(e)=>{
+    e.preventDefault();
+
+    const payload = JSON.stringify(userData);
+    // dispatch(getSignupToken(payload, userid))
+    console.log(userData);
+
+    swal({
+      title: "success",
+      text: "Profile update successfull",
+      icon: "success",
+      button: "OK",
+    });
+   
+    
+   }
+   
     return (
+      <form onSubmit={handleSubmit}>
       <Flex
         minH={'100vh'}
         align={'center'}
         justify={'center'}
-        bg={useColorModeValue('#090909', 'gray.800')}>
+        bg={useColorModeValue('#090909', 'gray.800')} color={'white'}>
         <Stack
           spacing={4}
           w={'full'}
-          maxW={'md'}
-          bg={useColorModeValue('white', 'gray.700')}
+          maxW={'xl'}
+          bg={useColorModeValue('#11181a', 'gray.700')}
           rounded={'xl'}
           boxShadow={'lg'}
           p={6}
           my={12}>
-          <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
+          <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}
+        >
             User Profile Edit
           </Heading>
+          
           <FormControl id="userName">
             <FormLabel>User Icon</FormLabel>
             <Stack direction={['column', 'row']} spacing={6}>
               <Center>
-                <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+                <Avatar size="xl" src={file}>
+                  {/* <FaUserCircle/> */}
                   <AvatarBadge
                     as={IconButton}
                     size="sm"
@@ -50,35 +106,52 @@ import {
                   />
                 </Avatar>
               </Center>
-              <Center w="full">
-                <Button w="full">Change Icon</Button>
+              <Center w="full" style={{cursior:"pointer", }} >
+                <input type='file' name="filename" w="full" _hover={{color:'green', bg:'white'}}
+                  background={'#090909'} onChange={handleChange}/>
+                  {/* Upload photo</input> */}
               </Center>
             </Stack>
           </FormControl>
-          <FormControl id="userName" isRequired>
+
+          <Flex>
+          <FormControl id="userName" isRequired >
             <FormLabel>User name</FormLabel>
             <Input
-              placeholder="UserName"
+              placeholder="UserName" name='username'
               _placeholder={{ color: 'gray.500' }}
-              type="text"
+              type="text" onChange={handleChange}
             />
           </FormControl>
-          <FormControl id="email" isRequired>
-            <FormLabel>Email address</FormLabel>
+          <FormControl id="Cpassword" isRequired marginLeft={'8'}>
+            <FormLabel>Current password</FormLabel>
             <Input
-              placeholder="your-email@example.com"
+              placeholder="Current password" name='currentpassword'
               _placeholder={{ color: 'gray.500' }}
-              type="email"
+              type="password" onChange={handleChange}
             />
           </FormControl>
-          <FormControl id="password" isRequired>
-            <FormLabel>Password</FormLabel>
+
+          </Flex>
+          <Flex>
+
+          <FormControl id="password" isRequired  >
+            <FormLabel>New Password</FormLabel>
             <Input
-              placeholder="password"
+              placeholder="password" name='newpassword'
               _placeholder={{ color: 'gray.500' }}
-              type="password"
+              type="password" onChange={handleChange}
             />
           </FormControl>
+          <FormControl id="password" isRequired marginLeft={'8'}>
+            <FormLabel>confirm Password</FormLabel>
+            <Input
+              placeholder="confirm password" name='confirmpassword'
+              _placeholder={{ color: 'gray.500' }}
+              type="password" onChange={handleChange}
+            />
+          </FormControl>
+          </Flex>
           <Stack spacing={6} direction={['column', 'row']}>
             <Button
               bg={'red.400'}
@@ -86,10 +159,10 @@ import {
               w="full"
               _hover={{
                 bg: 'red.500',
-              }}>
+              }} >
               Cancel
             </Button>
-            <Button
+            <Button  type='submit'
               bg={'blue.400'}
               color={'white'}
               w="full"
@@ -101,5 +174,6 @@ import {
           </Stack>
         </Stack>
       </Flex>
+          </form>
     );
   }
