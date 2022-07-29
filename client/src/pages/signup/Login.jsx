@@ -120,13 +120,13 @@ const handleSubmit2 = (e) => {
     const payload = JSON.stringify(userData);
     dispatch(getSignupToken(payload, userid))
 
-    console.log(payload);
-    swal({
-      title: "success",
-      text: "Signup success",
-      icon: "success",
-      button: "Login",
-    });
+    // console.log(payload);
+    // swal({
+    //   title: "success",
+    //   text: "Signup success",
+    //   icon: "success",
+    //   button: "Login",
+    // });
 setSign(false)
 }
 
@@ -280,7 +280,7 @@ setSign(false)
                       <Box>
                         <FormControl id="lastName">
                           <FormLabel>Last Name</FormLabel>
-                          <Input type="text" name='laststname' onChange={handleChange2}/>
+                          <Input type="text" name='lastname' onChange={handleChange2}/>
                         </FormControl>
                       </Box>
                     </HStack>

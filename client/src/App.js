@@ -4,6 +4,7 @@ import Footer from './pages/footer/Footer';
 import UserProfileEdit from './pages/userProfile/Userprofile';
 import Loading from './pages/loading/Loading';
 import Contact from './pages/contact/Contact';
+import Deshboard from './pages/AdminDashboard/Deshboard';
 
 const colors = {
   brand: {
@@ -19,15 +20,20 @@ const theme = extendTheme({ colors })
 function App() {
   return(
   <ChakraProvider theme={theme}>
-  <div>
+  <div >
 
     {/* <Login/> */}
 {/* <UserProfileEdit/> */}
 {/* <Loading/> */}
 
-<Contact/>
+{/* <Contact/> */}
 
-    {/* <Footer/> */}
+{/* <Deshboard/> */}
+
+  {/* <Footer/> */}
+
+<Deshboard/>
+
   </div>
   </ChakraProvider>
   );

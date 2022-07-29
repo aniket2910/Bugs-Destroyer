@@ -36,6 +36,7 @@ export const getLoginToken = (payload) => (dispatch) => {
     }).then((res) => {
         if (res.data.message) {
             dispatch(getLoginError(res.data.message))
+            console.log(res)
         }
         else if (res.data.token) {
             dispatch(getLoginSuccess(res.data))

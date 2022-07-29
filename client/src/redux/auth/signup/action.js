@@ -25,6 +25,7 @@ export const getSignupToken = (payload) => (dispatch) => {
         headers: { "Content-Type": "application/json" }
     }).then((res) => {
         dispatch(getSignupSuccess(res.data.token))
+        console.log(res);
     }).catch((err) => getSignupError())
 }
 
