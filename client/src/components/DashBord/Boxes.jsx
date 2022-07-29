@@ -11,13 +11,20 @@ import {
     ListItem,
     ListIcon,
     Button,
+    Spinner,
 } from '@chakra-ui/react';
-import { FaCheckCircle } from 'react-icons/fa';
-import TodosList from './TodosList';
+import TodosList, { TodosList1, TodosList2, TodosList3 } from './TodosList';
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getTodosData } from '../../redux/Todos/actions';
+
 
 function PriceWrapper({ children }) {
     return (
         <Box
+            minW={'sm'}
+            minH={'600px'}
+            maxH={'650px'}
             mb={4}
             shadow="base"
             borderWidth="1px"
@@ -30,6 +37,16 @@ function PriceWrapper({ children }) {
 }
 
 export default function ThreeTierPricing() {
+
+    const dispatch = useDispatch();
+    const { loading, todos, error } = useSelector((store) => store.todos);
+
+    useEffect(() => {
+        if (todos.length <= 0) {
+            dispatch(getTodosData())
+        }
+    }, [dispatch])
+
     return (
         <Box py={12} >
             <Stack
@@ -41,6 +58,7 @@ export default function ThreeTierPricing() {
                 <PriceWrapper>
                     <Box position="relative">
                         <Box
+
                             position="absolute"
                             top="-16px"
                             left="50%"
@@ -58,7 +76,19 @@ export default function ThreeTierPricing() {
                             </Text>
 
                         </Box>
-                        <TodosList />
+                        {
+                            loading &&
+                            <Box justifyItems={"center"}>
+                                <br />
+                                <Spinner color='white' size='xl' />
+                            </Box>
+                        }
+                        {
+                            todos.data && <TodosList1 data={todos.data} />
+                        }
+                        {
+                            error && <Heading color={'red'}>Something went wrong..</Heading>
+                        }
                     </Box>
                 </PriceWrapper>
                 <PriceWrapper>
@@ -79,9 +109,20 @@ export default function ThreeTierPricing() {
                                 rounded="xl">
                                 In progress
                             </Text>
-
                         </Box>
-                        <TodosList />
+                        {
+                            loading &&
+                            <Box justifyItems={"center"}>
+                                <br />
+                                <Spinner color='white' size='xl' />
+                            </Box>
+                        }
+                        {
+                            todos.data && <TodosList2 data={todos.data} />
+                        }
+                        {
+                            error && <Heading color={'red'}>Something went wrong..</Heading>
+                        }
                     </Box>
                 </PriceWrapper>
                 <PriceWrapper>
@@ -104,7 +145,19 @@ export default function ThreeTierPricing() {
                             </Text>
 
                         </Box>
-                        <TodosList />
+                        {
+                            loading &&
+                            <Box justifyItems={"center"}>
+                                <br />
+                                <Spinner color='white' size='xl' />
+                            </Box>
+                        }
+                        {
+                            todos.data && <TodosList3 data={todos.data} />
+                        }
+                        {
+                            error && <Heading color={'red'}>Something went wrong..</Heading>
+                        }
                     </Box>
                 </PriceWrapper>
             </Stack>

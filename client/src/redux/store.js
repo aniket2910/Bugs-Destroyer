@@ -1,0 +1,13 @@
+import { applyMiddleware, combineReducers, compose, legacy_createStore as createStore } from 'redux'
+import thunk from 'redux-thunk'
+import { todosReducer } from './Todos/reducer';
+
+const rootReducer = combineReducers({
+    todos: todosReducer
+})
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const enhancer = composeEnhancers(applyMiddleware(thunk))
+
+export const store = createStore(rootReducer, enhancer)

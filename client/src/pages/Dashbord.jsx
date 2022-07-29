@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Container, Heading, Progress, Text } from '@chakra-ui/react'
 import ProgressBar from '../components/DashBord/ProgressBar'
 import Boxes from '../components/DashBord/Boxes'
+
 const Dashbord = () => {
     return (
         <>
