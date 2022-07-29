@@ -22,6 +22,7 @@ const Links = [
   { name: "Dashboard", active: true, to: "/" },
   { name: "Todo's", active: false, to: "/todos" },
   { name: "Issues", active: false, to: "/issues" },
+  { name: "Raise Issue", active: false, to: "/create-issue" },
 ];
 
 const mobileLinks = [
@@ -29,6 +30,7 @@ const mobileLinks = [
   { name: "Todo's", active: false, to: "/todos" },
   { name: "Issues", active: false, to: "/issues" },
   { name: "Profile", active: false, to: "/profile" },
+  { name: "Raise Issue", active: false, to: "/create-issue" },
 ];
 
 const NavLink = ({ children }) => (
@@ -60,7 +62,7 @@ export default function Navbar() {
       top={"0px"}
       right={"0px"}
       left={"0px"}
-      zIndex={1}
+      zIndex={7}
       backgroundColor={"#000"}
       boxShadow={
         "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;"
@@ -78,7 +80,11 @@ export default function Navbar() {
             <DomLink style={{ border: "none" }} to="/">
               <HStack>
                 <Icon as={AiOutlineBug} w={8} h={8} fill="white" />
-                <Text display={{ base: "none", md: "flex" }} fontSize="lg">
+                <Text
+                  textTransform={"uppercase"}
+                  display={{ base: "none", md: "flex" }}
+                  fontSize="lg"
+                >
                   Destroyer
                 </Text>
               </HStack>

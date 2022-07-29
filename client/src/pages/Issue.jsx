@@ -9,6 +9,7 @@ const Issue = () => {
       m={"20px 0"}
       border={"1px solid #ffffff12"}
       borderTop={"10px solid #161B22"}
+      backgroundColor={'#101010'}
       boxShadow={
         "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;"
       }
@@ -52,20 +53,6 @@ const Issue = () => {
               maxime iste, illum minima iusto hic magnam fugiat, tempore ea illo
               quis natus dolore voluptatibus! Adipisci aperiam corrupti
               excepturi placeat saepe!
-            </Text>
-          </Box>
-          <Box
-            rounded={"10px"}
-            overflow={"hidden"}
-            p={"10px"}
-            mt={"15px"}
-            borderTop={"10px solid #20232A"}
-            backgroundColor={"#282C34"}
-          >
-            <Text fontSize={"15px"} fontWeight={"200"} letterSpacing={"1px"}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-              dicta ea impedit provident reiciendis maiores inventore omnis
-              atque labore consectetur.
             </Text>
           </Box>
           <Box>

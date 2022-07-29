@@ -1,6 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import styles from "../styles/Issues.module.css";
 import Issue from "./Issue";
 
 const Issues = () => {
