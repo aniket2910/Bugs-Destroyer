@@ -76,7 +76,7 @@ const getProfile = async (req, res) => {
     console.log(_id);
 
     let profile = await UserModel.find({ _id });
-    return res.status(200).send({ type: "success", data: profile });
+    return res.status(200).send({ type: "success", m: "SU", data: profile });
   } catch (e) {
     return res
       .status(500)

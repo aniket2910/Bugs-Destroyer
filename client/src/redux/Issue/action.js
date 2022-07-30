@@ -17,9 +17,8 @@ export const isLoading = () => (dispatch) => {
 export const getIssues = () => (dispatch) => {
   dispatch(isLoading());
   let token = JSON.parse(localStorage.getItem("token")) || "";
-  //   .get("https://bug-destroyer.herokuapp.com/issues/all", {
   axios
-    .get("https://bug-destroyer.herokuapp.com/issues/all", {
+    .get(`${process.env.REACT_APP_API_URL}/issues/all`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => {
@@ -40,7 +39,7 @@ export const createIssue = (payload) => (dispatch) => {
   dispatch(isLoading());
   let token = JSON.parse(localStorage.getItem("token")) || "";
   axios
-    .post("https://bug-destroyer.herokuapp.com/issues/create", payload, {
+    .post(`${process.env.REACT_APP_API_URL}/issues/create`, payload, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => {
@@ -67,7 +66,7 @@ export const postComment = (payload) => (dispatch) => {
   let token = JSON.parse(localStorage.getItem("token")) || "";
   axios
     .patch(
-      `https://bug-destroyer.herokuapp.com/issues/comment/${payload.id}`,
+      `${process.env.REACT_APP_API_URL}/issues/comment/${payload.id}`,
       payload,
       {
         headers: { Authorization: `Bearer ${token}` },

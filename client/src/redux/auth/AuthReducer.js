@@ -1,6 +1,8 @@
 import {
+  GET_USER,
   IS_ERR,
   IS_LOADING,
+  LOGOUT,
   SET_USER,
   SIGNIN_SUCCESS,
   SIGNUP_SUCCESS,
@@ -13,6 +15,7 @@ const initState = {
   token: "",
   res_msg: "",
   res_type: "",
+  currentUser: {},
 };
 
 export const AuthReducer = (state = initState, action) => {
@@ -27,14 +30,32 @@ export const AuthReducer = (state = initState, action) => {
       return {
         ...state,
         loading: false,
+        err: false,
         res_msg: action.payload.message,
         res_type: action.payload.type,
+      };
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        authStatus: false,
+        err: false,
+        loading: false,
+        token: "",
+      };
+    }
+    case GET_USER: {
+      console.log("REducer", action);
+      return {
+        ...state,
+        currentUser: action.payload,
       };
     }
     case SIGNIN_SUCCESS: {
       return {
         ...state,
         loading: false,
+        err: false,
         res_msg: action.payload.message,
         res_type: action.payload.type,
         authStatus: true,

@@ -27,7 +27,6 @@ const Issue = (props) => {
       ...commentData,
       id: _id,
     };
-    console.log(payload);
     dispatch(postComment(payload));
   };
   return (

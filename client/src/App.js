@@ -10,6 +10,7 @@ import "./index.css";
 import Dashbord from "./pages/Dashbord";
 import Issues from "./pages/Issues";
 import SplitScreen from "./pages/signup/Login";
+import UserProfileEdit from "./pages/userProfile/Userprofile";
 import { checkUser } from "./redux/auth/action";
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,14 @@ function App() {
             element={
               <RequireAuth>
                 <IssueForm />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <UserProfileEdit />
               </RequireAuth>
             }
           />

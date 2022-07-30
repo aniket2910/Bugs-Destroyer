@@ -16,7 +16,9 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { AiOutlineBug } from "react-icons/ai";
-import { NavLink as DomLink } from "react-router-dom";
+import { NavLink as DomLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/auth/action";
 
 const Links = [
   { name: "Dashboard", active: true, to: "/" },
@@ -55,6 +57,8 @@ const NavLink = ({ children }) => (
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <Box
       width={"100%"}
@@ -111,7 +115,7 @@ export default function Navbar() {
                   <Avatar
                     size={"sm"}
                     src={
-                      "https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                      "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                     }
                   />
                 </MenuButton>
@@ -138,6 +142,10 @@ export default function Navbar() {
                     backgroundColor={"#202124"}
                     _hover={{
                       backgroundColor: "#6d6d6d",
+                    }}
+                    onClick={() => {
+                      dispatch(logout());
+                      navigate("/signup");
                     }}
                   >
                     Log Out
