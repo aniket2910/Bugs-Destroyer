@@ -5,6 +5,7 @@ import UserProfileEdit from './pages/userProfile/Userprofile';
 import Loading from './pages/loading/Loading';
 import Contact from './pages/contact/Contact';
 import Deshboard from './pages/AdminDashboard/Deshboard';
+import { Logout } from './Logout/Logout';
 
 const colors = {
   brand: {
@@ -32,8 +33,9 @@ function App() {
 
   {/* <Footer/> */}
 
-<Deshboard/>
+{/* <Deshboard/> */}
 
+<Logout/>
   </div>
   </ChakraProvider>
   );

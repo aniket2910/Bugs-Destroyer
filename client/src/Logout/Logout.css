@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.main-container {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.gif-container>img {
+    width: 35%;
+    margin: auto;
+}
+
+.text>h2 {
+    font-size: 40px;
+    color: green;
+    font-weight: 600;
+    margin-top: -6px;
+}
+
+.text>p {
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+}
