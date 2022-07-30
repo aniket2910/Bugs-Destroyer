@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Input, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Input, Text, useToast } from "@chakra-ui/react";
 import {
   FormControl,
   FormLabel,
@@ -8,12 +8,23 @@ import {
 } from "@chakra-ui/react";
 import Editor from "./Editor";
 import CodingEditor from "./CodingEditor";
+import { useDispatch, useSelector } from "react-redux";
+import { createIssue } from "../redux/Issue/action";
+import { useNavigate } from "react-router-dom";
 
 const IssueForm = () => {
   const [issueData, setIssueData] = useState({});
   const [content, setContent] = useState("");
   const [code, setCode] = useState(``);
   const [showData, setShowData] = useState(false);
+  const toast = useToast();
+
+  const { isLoading, isErr, res_msg, res_type } = useSelector(
+    (store) => store.issue
+  );
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     let ip = e.target;
     setIssueData({
@@ -21,6 +32,20 @@ const IssueForm = () => {
       [ip.name]: ip.value,
     });
   };
+
+  useEffect(() => {
+    if (res_msg !== "") {
+      if (res_msg === "Issue created successfully") {
+        navigate("/issues");
+      }
+      toast({
+        title: res_msg,
+        status: res_type,
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }, [res_msg, res_type]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +55,7 @@ const IssueForm = () => {
       desc: content,
     };
     // setShowData(true);
+    dispatch(createIssue(payload));
     console.log(payload);
   };
   return (

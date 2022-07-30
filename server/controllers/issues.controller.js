@@ -4,8 +4,30 @@ const { IssueModel } = require("../models/IssueSchema.model");
 // To get all issues
 const getAllIssues = async (req, res) => {
   try {
-    const issues = await IssueModel.find({}).populate("comments");
-    return res.status(200).json({ data: issues });
+    IssueModel.aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "user_id",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "comments",
+          foreignField: "_id",
+          as: "comments",
+        },
+      },
+    ]).exec(function (err, results) {
+      if (err) {
+        return res.status(404).json({ message: err });
+      }
+      // callback
+      return res.status(200).json({ data: results });
+    });
   } catch (e) {
     res.status(500).json({ type: "error", message: e });
   }
@@ -19,7 +41,7 @@ const createIssue = async (req, res) => {
       title,
       desc,
       code,
-      user_id: req.user_data._id,
+      user_id: [req.user_data._id],
       deleted: false,
     });
     await issue.save();
@@ -67,6 +89,7 @@ const deleteIssue = async (req, res) => {
 // To  comment to a particular issue
 const commentToIssue = async (req, res) => {
   const id = req.params.id;
+  console.log(id, req.body);
   try {
     const comment = await CommentModel.create({
       comment: req.body.comment,

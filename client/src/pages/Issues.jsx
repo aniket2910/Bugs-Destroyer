@@ -1,8 +1,15 @@
-import { Box, Flex } from "@chakra-ui/react";
-import React from "react";
+import { Box, CircularProgress, Flex } from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getIssues } from "../redux/Issue/action";
 import Issue from "./Issue";
 
 const Issues = () => {
+  const dispatch = useDispatch();
+  const { isLoading, isErr, data } = useSelector((store) => store.issue);
+  useEffect(() => {
+    dispatch(getIssues());
+  }, []);
   return (
     <Box
       width={"100%"}
@@ -14,9 +21,15 @@ const Issues = () => {
       color={"#fff"}
     >
       <Box maxW={"760px"} m={"auto"} px={4}>
-        <Issue />
-        <Issue />
-        <Issue />
+        {isLoading ? (
+          <CircularProgress isIndeterminate color="blue.300" />
+        ) : isErr ? (
+          <div>Something went wrong!</div>
+        ) : (
+          data.map((item) => {
+            return <Issue key={item._id} {...item} />;
+          })
+        )}
       </Box>
     </Box>
   );

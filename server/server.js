@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 8080, () => {
   try {
     // To connect with DB
     connectDB();

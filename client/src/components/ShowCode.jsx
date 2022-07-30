@@ -5,15 +5,8 @@ import { dark, dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 SyntaxHighlighter.registerLanguage("jsx", jsx);
 
-const ShowCode = () => {
-  const codeString = `const ShowCode = () => {
-    const codeString = "(num) => num + 1";
-    return (
-      <SyntaxHighlighter language="javascript" style={dracula}>
-        {codeString}
-      </SyntaxHighlighter>
-    );
-  };`;
+const ShowCode = ({ code }) => {
+  const codeString = code;
   return (
     <SyntaxHighlighter language="javascript" style={dracula}>
       {codeString}

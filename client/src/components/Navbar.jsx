@@ -121,9 +121,12 @@ export default function Navbar() {
                   }
                   backgroundColor={"#202124"}
                 >
-                  <DomLink style={{ backgroundColor: "#202124" }} to="/profile">
+                  <DomLink to="/profile">
                     <MenuItem
                       backgroundColor={"#202124"}
+                      _focus={{
+                        backgroundColor: "#202124",
+                      }}
                       _hover={{
                         backgroundColor: "#6d6d6d",
                       }}
