@@ -89,7 +89,6 @@ const deleteIssue = async (req, res) => {
 // To  comment to a particular issue
 const commentToIssue = async (req, res) => {
   const id = req.params.id;
-  console.log(id, req.body);
   try {
     const comment = await CommentModel.create({
       comment: req.body.comment,

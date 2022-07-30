@@ -7,6 +7,7 @@ import IssueForm from "./components/IssueForm";
 import Navbar from "./components/Navbar";
 import RequireAuth from "./components/RequireAuth";
 import "./index.css";
+import Dashbord from "./pages/Dashbord";
 import Issues from "./pages/Issues";
 import SplitScreen from "./pages/signup/Login";
 import { checkUser } from "./redux/auth/action";
@@ -35,6 +36,14 @@ function App() {
             element={
               <RequireAuth>
                 <Issues />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <Dashbord />
               </RequireAuth>
             }
           />

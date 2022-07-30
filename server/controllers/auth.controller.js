@@ -2,8 +2,6 @@ const UserModel = require("../models/UserSchema");
 const crypto = require("node:crypto");
 const jwt = require("jsonwebtoken");
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJBbmlrZXQiLCJsYXN0bmFtZSI6IlNvbGFua2kiLCJ1c2VyX2lkIjoiNjJlMjkzYjE2MGY3ZGMxOTUwZjVkNzAzIiwiZW1haWwiOiJzb2xhbmtpYW5pa2V0MDQxMUBnbWFpbC5jb20iLCJpYXQiOjE2NTkwMTYxNDYsImV4cCI6MTY1OTEwMjU0Nn0.nFiS_Q6QQGWOkyFdrWzK-bSWKhNvl_7nD_3pH838RhM
-
 const registerUser = async (req, res) => {
   const { firstname, lastname, email, password } = req.body;
   try {
@@ -49,7 +47,6 @@ const loginUser = async (req, res) => {
           lastname: user?.lastname,
           user_id: user?._id,
           email: user?.email,
-
         },
         "SECRETTOKENKEY",
         {
@@ -75,14 +72,16 @@ const loginUser = async (req, res) => {
 
 const getProfile = async (req, res) => {
   try {
-    let _id = req.params.id;
-    let profile = await UserModel.find(_id);
+    let _id = req.user_data._id;
+    console.log(_id);
+
+    let profile = await UserModel.find({ _id });
     return res.status(200).send({ type: "success", data: profile });
   } catch (e) {
     return res
       .status(500)
       .json({ type: "error", message: "Internal Error Occured" });
   }
-}
+};
 
 module.exports = { registerUser, loginUser, getProfile };
