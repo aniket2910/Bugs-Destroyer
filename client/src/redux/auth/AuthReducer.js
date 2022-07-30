@@ -42,6 +42,8 @@ export const AuthReducer = (state = initState, action) => {
         err: false,
         loading: false,
         token: "",
+        res_msg: "",
+        res_type: "",
       };
     }
     case GET_USER: {

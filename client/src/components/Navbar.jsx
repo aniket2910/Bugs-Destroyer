@@ -59,6 +59,10 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleLogOut = () => {
+    dispatch(logout());
+    navigate("/signup");
+  };
   return (
     <Box
       width={"100%"}
@@ -143,10 +147,7 @@ export default function Navbar() {
                     _hover={{
                       backgroundColor: "#6d6d6d",
                     }}
-                    onClick={() => {
-                      dispatch(logout());
-                      navigate("/signup");
-                    }}
+                    onClick={() => handleLogOut()}
                   >
                     Log Out
                   </MenuItem>
