@@ -1,8 +1,5 @@
 # Bugs-Destroyer
-
-
-
-<img src="https://pbs.twimg.com/media/FY-Y459WQAMPv5l?format=jpg&name=360x360" alt="https://pbs.twimg.com/media/FY-Y46CXEAA_-j5?format=jpg&name=360x360" />
+website is all about productivity, bug spotting, and problem-solving to all out there who faces problem regarding their tech journey so don't hesitate to connect with us
 
 
 # Teck Stack
