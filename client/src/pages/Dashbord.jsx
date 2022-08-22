@@ -13,7 +13,7 @@ const Dashbord = () => {
   }, []);
   return (
     <>
-      <Box bg="gray.800">
+      <Box bg="#101010">
         <br />
         <Heading
           textAlign="center"

@@ -139,7 +139,6 @@ export default function SplitScreen() {
                     marginTop: "8px",
                   }}
                 ></div>
-
                 <Flex justifyContent={"center"} gap={5}>
                   <Box
                     href="#"
@@ -314,12 +313,7 @@ export default function SplitScreen() {
                 OR
               </Text>
 
-              <Box
-                rounded={"lg"}
-                // bg={useColorModeValue('white', 'gray.700')}
-
-                p={8}
-              >
+              <Box rounded={"lg"} p={8}>
                 <Stack spacing={4}>
                   <form onSubmit={(e) => handleSignUpSubmit(e)}>
                     <HStack>

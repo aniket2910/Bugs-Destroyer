@@ -4,6 +4,7 @@ import {
   IS_ERR,
   IS_LOADING,
   LOGOUT,
+  RESET_RES_MSG,
   SET_USER,
   SIGNIN_SUCCESS,
   SIGNUP_SUCCESS,
@@ -28,14 +29,16 @@ export const signup = (payload) => (dispatch) => {
     .catch((e) => {
       dispatch({
         type: IS_ERR,
-        payload: e.data,
+        payload: e.response.data,
       });
     });
 };
 
 export const checkUser = () => (dispatch) => {
   let token = JSON.parse(localStorage.getItem("token")) || "";
+  console.log(token);
   if (token !== "") {
+    console.log("first");
     dispatch({
       type: SET_USER,
       payload: token,
@@ -46,21 +49,26 @@ export const checkUser = () => (dispatch) => {
 export const login = (payload) => (dispatch) => {
   dispatch(isLoading());
   axios
-    .post(`${process.env.REACT_APP_API_URL}/auth/login`, payload)
+    .post(`https://bugg-destoyer.herokuapp.com/auth/login`, payload)
     .then((res) => {
       console.log(res);
       if (res.data.type === "success") {
         localStorage.setItem("token", JSON.stringify(res.data.token));
+        dispatch({
+          type: SIGNIN_SUCCESS,
+          payload: res.data,
+        });
+      } else {
+        dispatch({
+          type: IS_ERR,
+          payload: res.data,
+        });
       }
-      dispatch({
-        type: SIGNIN_SUCCESS,
-        payload: res.data,
-      });
     })
     .catch((e) => {
       dispatch({
         type: IS_ERR,
-        payload: e.data,
+        payload: e.response.data,
       });
     });
 };
