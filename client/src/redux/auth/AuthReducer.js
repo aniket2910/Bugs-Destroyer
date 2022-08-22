@@ -3,6 +3,7 @@ import {
   IS_ERR,
   IS_LOADING,
   LOGOUT,
+  RESET_RES_MSG,
   SET_USER,
   SIGNIN_SUCCESS,
   SIGNUP_SUCCESS,
@@ -47,7 +48,7 @@ export const AuthReducer = (state = initState, action) => {
       };
     }
     case GET_USER: {
-      console.log("REducer", action);
+      // console.log("REducer", action);
       return {
         ...state,
         currentUser: action.payload,
@@ -78,6 +79,15 @@ export const AuthReducer = (state = initState, action) => {
         err: true,
         res_msg: action.payload.message,
         res_type: action.payload.type,
+      };
+    }
+    case RESET_RES_MSG: {
+      return {
+        ...state,
+        loading: false,
+        err: false,
+        res_msg: "",
+        res_type: "",
       };
     }
     default: {
