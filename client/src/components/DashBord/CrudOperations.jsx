@@ -83,12 +83,12 @@ const CrudOperations = ({ id }) => {
 
   return (
     <HStack>
-      <Button bg={"gray.800"} onClick={() => partiallyDelete(id)}>
+      <Button bg={"#282828"} onClick={() => partiallyDelete(id)}>
         <DeleteIcon color={"red"} />
       </Button>
       <Select
         onChange={(e) => handleSelect(e)}
-        bg={"gray.800"}
+        bg={"#282828"}
         size={"sm"}
         color="white"
         fontSize={"12px"}
