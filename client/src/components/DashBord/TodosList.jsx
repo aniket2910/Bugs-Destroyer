@@ -27,7 +27,7 @@ function TodosList1({ data }) {
 
     return (
         <Box p={4}>
-            <Container maxH={'550px'} mt={10} overflowY={'scroll'} scrollbar='red' overscrollBehaviorY='auto'>
+            <Container maxH={'550px'} mt={10} overflowY={'auto'} >
                 <SimpleGrid columns={{ base: 1 }} spacing={10}>
                     {
                         data && data.map((elem) => (
@@ -72,7 +72,7 @@ function TodosList2({ data }) {
 
     return (
         <Box p={4}>
-            <Container maxH={'550px'} mt={10} overflowY={'scroll'} overscrollBehaviorY='contain'>
+            <Container maxH={'550px'} mt={10} overflowY={'auto'}>
                 <SimpleGrid columns={{ base: 1 }} spacing={10}>
                     {
                         data && data.map((elem) => (
@@ -117,7 +117,7 @@ function TodosList3({ data }) {
 
     return (
         <Box p={4}>
-            <Container maxH={'550px'} mt={10} overflowY={'scroll'} >
+            <Container maxH={'550px'} mt={10} overflowY={'auto'} >
                 <SimpleGrid columns={{ base: 1 }} spacing={10}>
                     {
                         data && data.map((elem) => (
